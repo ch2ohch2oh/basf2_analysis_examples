@@ -28,23 +28,26 @@ import modularAnalysis as ma
 my_path = b2.create_path()
 
 # load input ROOT file
-ma.inputMdst(environmentType='default',
-             filename=b2.find_file('B2pi0D_D2hh_D2hhh_B2munu_evtgen.root', 'examples', False),
-             path=my_path)
+# ma.inputMdst(environmentType='default',
+#             filename=b2.find_file('B2pi0D_D2hh_D2hhh_B2munu_evtgen.root', 'examples', False),
+#             path=my_path)
 
-# In case of conflict with geometry, you may use this line instead:
-#ma.analysis_main.add_module("RootInput", inputFileName='with_gearbox_1000.root')
+my_path.add_module("RootInput", inputFileName='event_gen.root')
+
+# Without loadGearbox the program will run just fine.
+# ma.loadGearbox(path=my_path)
 
 # simulation
 si.add_simulation(path=my_path)
 
 # reconstruction
+# Not sure what is reconstructed here.
 re.add_reconstruction(path=my_path)
 
 # dump in MDST format
 mdst.add_mdst_output(path=my_path,
                      mc=True,
-                     filename='reconstructed.root')
+                     filename='sim_recon.root')
 
 # Show progress of processing
 progress = b2.register_module('ProgressBar')
