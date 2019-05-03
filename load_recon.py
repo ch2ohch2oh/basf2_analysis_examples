@@ -31,12 +31,14 @@ from stdPi0s import stdPi0s
 my_path = b2.create_path()
 
 # load input ROOT file
-ma.inputMdst(environmentType='default',
-             filename=b2.find_file('B2pi0D_D2hh_D2hhh_B2munu.root', 'examples', False),
-             path=my_path)
+#ma.inputMdst(environmentType='default',
+#             filename=b2.find_file('B2pi0D_D2hh_D2hhh_B2munu.root', 'examples', False),
+#             path=my_path)
+
+my_path.add_module("RootInput", inputFileName='sim_recon.root')
 
 # print contents of the DataStore before loading Particles
-ma.printDataStore()
+ma.printDataStore(path=my_path)
 
 # create and fill gamma/e/mu/pi/K/p ParticleLists
 # second argument are the selection criteria: '' means no cut, take all
@@ -68,20 +70,20 @@ stdPi0s(listtype='looseFit', path=my_path)
 ma.printDataStore()
 
 # print out the contents of each ParticleList
-ma.printList('gamma:all', False, path=my_path)
-ma.printList('gamma:highE', False, path=my_path)
-ma.printList('e-:all', False, path=my_path)
-ma.printList('e-:good', False, path=my_path)
-ma.printList('mu-:all', False, path=my_path)
-ma.printList('mu-:good', False, path=my_path)
+#ma.printList('gamma:all', False, path=my_path)
+#ma.printList('gamma:highE', False, path=my_path)
+#ma.printList('e-:all', False, path=my_path)
+#ma.printList('e-:good', False, path=my_path)
+#ma.printList('mu-:all', False, path=my_path)
+#ma.printList('mu-:good', False, path=my_path)
 ma.printList('pi-:all', False, path=my_path)
 ma.printList('pi-:good', False, path=my_path)
-ma.printList('K-:all', False, path=my_path)
-ma.printList('K-:good', False, path=my_path)
-ma.printList('anti-p-:all', False, path=my_path)
-ma.printList('anti-p-:good', False, path=my_path)
-ma.printList('K_S0:all', False, path=my_path)
-ma.printList('pi0:looseFit', False, path=my_path)
+##ma.printList('K-:all', False, path=my_path)
+#ma.printList('K-:good', False, path=my_path)
+#ma.printList('anti-p-:all', False, path=my_path)
+#ma.printList('anti-p-:good', False, path=my_path)
+#ma.printList('K_S0:all', False, path=my_path)
+#ma.printList('pi0:looseFit', False, path=my_path)
 
 
 # Select variables that we want to store to ntuple
@@ -113,7 +115,7 @@ pi0_variables = vc.mc_truth + \
     ['extraInfo(BDT)', 'decayAngle(0)']
 
 # Saving variables to ntuple
-output_file = 'B2A202-LoadReconstructedParticles.root'
+output_file = 'load_recon.root'
 ma.variablesToNtuple(decayString='pi+:all',
                      variables=charged_particle_variables,
                      treename='pion',
