@@ -42,13 +42,15 @@ my_path = b2.create_path()
 # This is needed before you generate any events
 ma.setupEventInfo(noEvents=100, path=my_path)
 
+
 # Adding generator
 # This specific event generator will generate either charged final states (charged B mesons)
 # or mixed final states (neutal B mesons)
 ge.add_evtgen_generator(path=my_path,
                         finalstate='signal',
-                        signaldecfile=b2.find_file(
-                            'analysis/examples/tutorials/B2A101-Y4SEventGeneration.dec'))
+                        signaldecfile='event_gen.dec')
+
+ma.loadGearbox(path=my_path)
 
 # Set the first parameter to zero if you want to see all the events.
 # This will show how many particles are generated in each event.
