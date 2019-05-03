@@ -40,7 +40,7 @@ my_path = b2.create_path()
 
 # Setting up number of events to generate
 # This is needed before you generate any events
-ma.setupEventInfo(noEvents=100, path=my_path)
+ma.setupEventInfo(noEvents=10, path=my_path)
 
 
 # Adding generator
