@@ -26,12 +26,17 @@ import sys
 my_path = b2.create_path()
 
 # load input ROOT file
-ma.inputMdst(environmentType='default',
-             filename=b2.find_file('B2pi0D_D2hh_D2hhh_B2munu.root', 'examples', False),
-             path=my_path)
+#ma.inputMdst(environmentType='default',
+#            filename=b2.find_file('B2pi0D_D2hh_D2hhh_B2munu.root', 'examples', False),
+#            path=my_path)
+
+# You do not have to use reconstructed MC data. The difference is 
+# if you use reconstructed root file, there will be more entries in 
+# the output of printDataStore(), like tracks and ECL clusters etc.
+my_path.add_module("RootInput", inputFileName='event_gen.root')
 
 # print contents of the DataStore before loading MCParticles
-ma.printDataStore(path=my_path)
+ma.printDataStore(-1, path=my_path)
 
 # create and fill gamma/e/mu/pi/K/p ParticleLists
 # second argument are the selection criteria: '' means no cut, take all
@@ -47,16 +52,18 @@ ma.fillParticleListsFromMC([photons, electrons, muons, pions, kaons, protons], p
 # print contents of the DataStore after loading MCParticles
 # the difference is that DataStore now contains StoreArray<Particle>
 # filled with Particles created from generated final state particles
-ma.printDataStore(path=my_path)
+ma.printDataStore(-1, path=my_path)
 
 # print out the contents of each ParticleList
-ma.printList(list_name='gamma:gen', full=False, path=my_path)
-ma.printList(list_name='e-:gen', full=False, path=my_path)
-ma.printList(list_name='mu-:gen', full=False, path=my_path)
+#ma.printList(list_name='gamma:gen', full=True, path=my_path)
+#ma.printList(list_name='e-:gen', full=False, path=my_path)
+#ma.printList(list_name='mu-:gen', full=False, path=my_path)
 ma.printList(list_name='pi-:gen', full=False, path=my_path)
-ma.printList(list_name='K-:gen', full=False, path=my_path)
-ma.printList(list_name='anti-p-:gen', full=False, path=my_path)
+#ma.printList(list_name='K-:gen', full=False, path=my_path)
+#ma.printList(list_name='anti-p-:gen', full=False, path=my_path)
 
+ma.printVariableValues(list_name='pi-:gen', var_names=['M', 'E'], path=my_path)
+ 
 # Process the events
 b2.process(my_path)
 
