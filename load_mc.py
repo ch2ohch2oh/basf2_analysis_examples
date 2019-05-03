@@ -47,6 +47,7 @@ pions = ('pi-:gen', '')
 kaons = ('K-:gen', '')
 protons = ('anti-p-:gen', '')
 
+# During event generation, the particle information was written in the root file.
 ma.fillParticleListsFromMC([photons, electrons, muons, pions, kaons, protons], path=my_path)
 
 # print contents of the DataStore after loading MCParticles
