@@ -31,6 +31,7 @@ inputMdst(environmentType='default',
           path=mypath)
 
 # fill an all photon and all charged particle (does not really matter which one) list
+# clusterE: Returns ECL cluster's energy corrected for leakage and background
 fillParticleList('gamma:all', 'clusterE > 0.1', path=mypath)  # neutral clusters
 fillParticleList('e-:all', 'clusterE > 0.1', path=mypath)  # track matched clusters
 
