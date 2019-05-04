@@ -104,7 +104,7 @@ v0_vars = vc.kinematics + \
 
 
 # saving variables to ntuple
-rootOutputFile = 'B2A203-LoadV0s.root'
+rootOutputFile = 'load_v0.root'
 
 # K_S0 from V0s
 ma.variablesToNtuple(treename='kshort_v0',
