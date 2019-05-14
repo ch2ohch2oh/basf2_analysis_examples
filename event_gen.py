@@ -64,11 +64,14 @@ my_path.add_module('RootOutput', outputFileName='event_gen.root')
 # Show progress bar
 my_path.add_module("ProgressBar")
 
+# Add log file
+b2.log_to_file("event_gen.log")
+
 # process all modules added to the analysis_main path
 # (note: analysis_main is the default path created in the modularAnalysis.py)
 b2.process(path=my_path)
 
 # print out the summary
-print(b2.statistics)
+b2.B2INFO(b2.statistics)
 
 
