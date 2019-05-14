@@ -40,7 +40,7 @@ my_path = b2.create_path()
 
 # Setting up number of events to generate
 # This is needed before you generate any events
-ma.setupEventInfo(noEvents=10, path=my_path)
+ma.setupEventInfo(noEvents=10000, path=my_path)
 
 
 # Adding generator
@@ -60,6 +60,9 @@ ma.loadGearbox(path=my_path)
 
 # dump generated events in DST format to the output ROOT file
 my_path.add_module('RootOutput', outputFileName='event_gen.root')
+
+# Show progress bar
+my_path.add_module("ProgressBar")
 
 # process all modules added to the analysis_main path
 # (note: analysis_main is the default path created in the modularAnalysis.py)
